@@ -5,28 +5,50 @@ import random
 
 
 import pytest
-import session7
-from session7 import reduce_even_nums, check_fibonacci, add_two_iterables
+import session8
+from session8 import add, mul, div, counter_local_dict, counter_global_dict, next_fibonacci, check_docstring, func_dict
 import time
 import os.path
 import re
 import inspect 
 
 README_CONTENT_CHECK_FOR = [
-    'lambda',
-    'map',
-    'filter',
+    'Closure',
+    'outer',
+    'inner',
     'doc',
     'string',
+    'free',
+    'variable'
 ]
 
-def test_check_fibonacci():
-    assert check_fibonacci(13), "13 is a fibonacci number"
+def test_check_docstring():
+    fn = check_docstring()
+    assert fn(check_docstring), "check_docstring function has greater than 50 characters "
 
-def test_add_two_iterables():
-    a = [1,2,3,4]
-    b = [2,3,4,5]
-    assert add_two_iterables(a,b) == [5,9], "a should be even, b should be odd"
+def test_next_fibonacci():
+    t = next_fibonacci()
+    f = t()
+    f = t()
+    f = t()
+    assert f == 2, "Third fibonacci number is 2"
+
+def test_counter_global():
+    counter_add, counter_mul, counter_div = counter_global_dict()
+    counter_add(5,2)
+    counter_div(5,2)
+    counter_mul(5,2)
+    assert func_dict ==  {'add':1, 'mul':1, 'div':1}, "Global dict add, mul, div called 1 time each"
+
+def test_counter_local():
+    local_dict_1 = {"add":0, "mul":0, "div":0}
+    local_dict_2 = {"add":0, "mul":0, "div":0}
+    counter_add_1, counter_mul_1, counter_div_1 = counter_local_dict(local_dict_1)
+    counter_add_2, counter_mul_2, counter_div_2 = counter_local_dict(local_dict_2)
+    counter_add_1(5,3)
+    counter_div_2(4,5)
+    assert local_dict_1 ==  {'add':1, 'mul':0, 'div':0}, "Local Dict 1 Add called 1 time"
+    assert local_dict_2 ==  {'add':0, 'mul':0, 'div':1}, "Local Dict 2 Div called 1 time"
 
 def test_readme_exists():
     assert os.path.isfile("README.md"), "README.md file missing!"
@@ -58,7 +80,7 @@ def test_readme_file_for_formatting():
 def test_fourspace():
     ''' Returns pass if used four spaces for each level of syntactically \
     significant indenting.'''
-    lines = inspect.getsource(session7)
+    lines = inspect.getsource(session8)
     spaces = re.findall('\n +.', lines)
     for space in spaces:
         assert re.search('[a-zA-Z#@\'\"]', space), "Your code intentation does not follow PEP8 guidelines"
@@ -66,7 +88,7 @@ def test_fourspace():
         "Your code intentation does not follow PEP8 guidelines"
 
 def test_function_name_had_cap_letter():
-    functions = inspect.getmembers(session7, inspect.isfunction)
+    functions = inspect.getmembers(session8, inspect.isfunction)
     for function in functions:
         assert len(re.findall('([A-Z])', function[0])) == 0, "You have used Capital letter(s) in your function names"
 
