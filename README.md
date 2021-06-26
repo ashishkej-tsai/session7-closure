@@ -1,5 +1,5 @@
 
-# EPAi Session8 Scopes \& Closure Assignment
+# EPAi3.0 Batch2 Session7 Scopes \& Closure Assignment
 Assignment to check our knowledge of Scopes and Closure Functions.
 
 ## 1. check docstring:

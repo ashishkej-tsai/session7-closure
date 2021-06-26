@@ -25,7 +25,7 @@ def next_fibonacci():
         '''
         Closure inner function to calculate the next fibonacci number
         '''
-        nonlocal num1, num2,cnt
+        nonlocal num1, num2, cnt
         if cnt == 0:
             cnt = 1
             return 1

@@ -5,8 +5,8 @@ import random
 
 
 import pytest
-import session8
-from session8 import add, mul, div, counter_local_dict, counter_global_dict, next_fibonacci, check_docstring, func_dict
+import session7
+from session7 import add, mul, div, counter_local_dict, counter_global_dict, next_fibonacci, check_docstring, func_dict
 import time
 import os.path
 import re
@@ -80,7 +80,7 @@ def test_readme_file_for_formatting():
 def test_fourspace():
     ''' Returns pass if used four spaces for each level of syntactically \
     significant indenting.'''
-    lines = inspect.getsource(session8)
+    lines = inspect.getsource(session7)
     spaces = re.findall('\n +.', lines)
     for space in spaces:
         assert re.search('[a-zA-Z#@\'\"]', space), "Your code intentation does not follow PEP8 guidelines"
@@ -88,7 +88,7 @@ def test_fourspace():
         "Your code intentation does not follow PEP8 guidelines"
 
 def test_function_name_had_cap_letter():
-    functions = inspect.getmembers(session8, inspect.isfunction)
+    functions = inspect.getmembers(session7, inspect.isfunction)
     for function in functions:
         assert len(re.findall('([A-Z])', function[0])) == 0, "You have used Capital letter(s) in your function names"
 
